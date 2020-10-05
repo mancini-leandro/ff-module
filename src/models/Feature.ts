@@ -1,11 +1,11 @@
+import * as lodash from 'lodash';
+
 export class Feature {
   name: string;
   type: string;
   value: string;
 
-  constructor(name: string, type: string, value: string) {
-    this.name = name;
-    this.type = type;
-    this.value = value;
+  getFeatureName(features: Feature[], featureName?: string): Feature {
+    return lodash.find(features, { name: featureName }) as Feature;
   }
 }

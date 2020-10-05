@@ -25,4 +25,10 @@ export class FFModule {
 
     apiFeature.getFeatures().subscribe((res: Feature[]) => (this.FEATURES = res));
   }
+
+  getFeature(featureName?: string): Feature {
+    const feature = new Feature().getFeatureName(this.FEATURES, featureName);
+
+    return feature;
+  }
 }

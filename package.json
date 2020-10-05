@@ -1,17 +1,26 @@
 {
-  "name": "ff-module",
+  "name": "ff-module-pp",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Feature flags",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --config jestconfig.json",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "tslint -p tsconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mancini-leandro/ff-module.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["Feature flags", "Feature toggle"],
+  "author": "Leandro Mancini",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/mancini-leandro/ff-module/issues"
@@ -25,5 +34,8 @@
     "tslint": "^6.1.3",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^4.0.3"
-  }
+  },
+  "files": [
+    "lib/**/*"
+  ]
 }

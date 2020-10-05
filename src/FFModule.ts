@@ -12,7 +12,7 @@ export class FFModule {
     this.getFeatures();
   }
 
-  private async init() {
+  async init() {
     this.features = await this.getFeatures();
   }
 

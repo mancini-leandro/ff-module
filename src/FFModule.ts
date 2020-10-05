@@ -27,11 +27,12 @@ export class FFModule {
   }
 
   getFeature(featureName?: string): Feature {
-    const feature = new Feature().getFeatureName(this.FEATURES, featureName);
+    if (this.FEATURES.length > 0) {
+      const feature = new Feature().getFeatureName(this.FEATURES, featureName);
 
-    // tslint:disable-next-line: no-console
-    console.log(feature);
+      return feature;
+    }
 
-    return feature;
+    return new Feature();
   }
 }

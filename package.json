@@ -1,0 +1,29 @@
+{
+  "name": "ff-module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mancini-leandro/ff-module.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mancini-leandro/ff-module/issues"
+  },
+  "homepage": "https://github.com/mancini-leandro/ff-module#readme",
+  "devDependencies": {
+    "@types/jest": "^26.0.14",
+    "jest": "^26.5.0",
+    "prettier": "^2.1.2",
+    "ts-jest": "^26.4.1",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^4.0.3"
+  }
+}

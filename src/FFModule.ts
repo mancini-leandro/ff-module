@@ -9,7 +9,7 @@ export class FFModule {
   constructor(url: string) {
     this.config = new FFConfig(url);
 
-    this.getFeatures();
+    this.init();
   }
 
   async init() {

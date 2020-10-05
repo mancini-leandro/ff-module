@@ -17,12 +17,17 @@ export class FFModule {
   constructor(url: string) {
     this.config = new FFConfig(url);
 
-    this.getFeatures();
+    // this.getFeatures();
   }
 
-  private getFeatures() {
+  async getFeatures() {
     const apiFeature = new ApiFeature(this.config.url);
 
-    apiFeature.getFeatures().then((res: Feature[]) => (this.features = res));
+    const retorno = await apiFeature.getFeatures();
+
+    // tslint:disable-next-line: no-console
+    console.log(retorno);
+
+    // await apiFeature.getFeatures().then((res: Feature[]) => (this.features = res));
   }
 }

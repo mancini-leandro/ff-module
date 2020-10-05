@@ -4,30 +4,21 @@ import { Feature } from './models/Feature';
 
 export class FFModule {
   config: FFConfig;
-
-  get features() {
-    return this.FEATURES;
-  }
-
-  set features(value: Feature[]) {
-    this.FEATURES = value;
-  }
-  private FEATURES: Feature[] = [];
+  public features: Feature[] = [];
 
   constructor(url: string) {
     this.config = new FFConfig(url);
 
-    // this.getFeatures();
+    this.getFeatures();
   }
 
-  async getFeatures() {
+  private async init() {
+    this.features = await this.getFeatures();
+  }
+
+  private getFeatures(): Promise<Feature[]> {
     const apiFeature = new ApiFeature(this.config.url);
 
-    const retorno = await apiFeature.getFeatures();
-
-    // tslint:disable-next-line: no-console
-    console.log(retorno);
-
-    // await apiFeature.getFeatures().then((res: Feature[]) => (this.features = res));
+    return apiFeature.getFeatures();
   }
 }

@@ -4,7 +4,15 @@ import { Feature } from './models/Feature';
 
 export class FFModule {
   config: FFConfig;
-  features: Feature[];
+
+  get features() {
+    return this.FEATURES;
+  }
+
+  set features(value: Feature[]) {
+    this.FEATURES = value;
+  }
+  private FEATURES: Feature[] = [];
 
   constructor(url: string) {
     this.config = new FFConfig(url);

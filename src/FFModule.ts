@@ -15,6 +15,6 @@ export class FFModule {
   private getFeatures() {
     const apiFeature = new ApiFeature(this.config.url);
 
-    apiFeature.getFeatures().then((res: Feature[]) => this.features = res);
+    apiFeature.getFeatures().then((res: Feature[]) => (this.features = res));
   }
 }

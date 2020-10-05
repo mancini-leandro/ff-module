@@ -8,7 +8,7 @@ export class FFModule {
   get features(): Feature[] {
     return this.FEATURES;
   }
-  
+
   set features(value: Feature[]) {
     this.FEATURES = value;
   }
@@ -22,7 +22,7 @@ export class FFModule {
 
   private init() {
     const apiFeature = new ApiFeature(this.config.url);
-    
-    apiFeature.getFeatures().subscribe((res: Feature[]) => this.FEATURES = res);
+
+    apiFeature.getFeatures().subscribe((res: Feature[]) => (this.FEATURES = res));
   }
 }

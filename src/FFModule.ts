@@ -4,21 +4,25 @@ import { Feature } from './models/Feature';
 
 export class FFModule {
   config: FFConfig;
-  public features: Feature[] = [];
+
+  get features(): Feature[] {
+    return this.FEATURES;
+  }
+  
+  set features(value: Feature[]) {
+    this.FEATURES = value;
+  }
+
+  private FEATURES: Feature[] = [];
 
   constructor(url: string) {
     this.config = new FFConfig(url);
-
     this.init();
   }
 
-  async init() {
-    this.features = await this.getFeatures();
-  }
-
-  private getFeatures(): Promise<Feature[]> {
+  private init() {
     const apiFeature = new ApiFeature(this.config.url);
-
-    return apiFeature.getFeatures();
+    
+    apiFeature.getFeatures().subscribe((res: Feature[]) => this.FEATURES = res);
   }
 }

@@ -1,6 +1,9 @@
 import { IFeature } from './/interfaces/IFeature';
 import { IApiResponse } from './interfaces/IApiResponse';
 import { Feature } from './models/Feature';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import * as lodash from 'lodash';
 
 export class ApiFeature implements IFeature {
   url: string;
@@ -9,33 +12,44 @@ export class ApiFeature implements IFeature {
     this.url = url;
   }
 
-  getFeatures(): Promise<any> {
+  getFeatures(featureName?: string): Observable<Feature[]> {
+    if (featureName) {
+      return this.fetchFeatureName(featureName);
+    }
+
+    return this.fetchFeature();
+  }
+
+  private fetchFeatureName(featureName: string): Observable<any> {
+    return this.fetchFeature()
+    .pipe(map((items: Feature[]) => this.mapFeature(items, featureName)));
+  }
+
+  private fetchFeature(): Observable<Feature[]> {
     const apiUrl = this.url;
 
-    return fetch(apiUrl, {
-      method: 'post',
-      body: JSON.stringify({}),
-    })
+    return new Observable(subscribe => {
+      fetch(apiUrl, {
+        method: 'post',
+        body: JSON.stringify({}),
+      })
       .then(this.handleErrors)
       .then((response: Response) => {
         return response.json();
       })
       .then((response: IApiResponse<Feature[]>) => {
-        if (response.data && response.data.length > 0) {
-          return response.data;
-        }
-
-        return response;
+        subscribe.next(response.data);
+        subscribe.complete();
       })
-      .catch((ex) => {
-        // tslint:disable-next-line: no-console
-        console.error('Falha ao buscar flags. ' + ex);
-
-        throw Error(ex);
-      });
+      .catch(err => subscribe.error(err));
+    });
   }
 
-  handleErrors(response: Response) {
+  private mapFeature(items: Feature[], featureName: string) {
+    return lodash.find(items, { name: featureName });
+  }
+
+  private handleErrors(response: Response) {
     if (!response.ok) {
       throw Error(response.statusText);
     }

@@ -1,3 +1,6 @@
+import { Observable } from "rxjs";
+import { Feature } from "../models/Feature";
+
 export interface IFeature {
-  getFeatures(): Promise<any>;
+  getFeatures(): Observable<Feature[]>;
 }

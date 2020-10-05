@@ -3,21 +3,19 @@ import { ApiFeature } from './ApiFeature';
 import { Feature } from './models/Feature';
 
 export class FFModule {
-    config: FFConfig;
-    features: Feature[];
+  config: FFConfig;
+  features: Feature[];
 
-    constructor(
-        url: string
-    ) {
-        this.config = new FFConfig(url);
+  constructor(url: string) {
+    this.config = new FFConfig(url);
 
-        this.getFeatures();
-    }
+    this.getFeatures();
+  }
 
-    getFeatures() {
-        const apiFeature = new ApiFeature(this.config.url);
+  getFeatures() {
+    const apiFeature = new ApiFeature(this.config.url);
 
-        // tslint:disable-next-line: no-console
-        apiFeature.getFeatures().then(res => console.log(res));
-    }
+    // tslint:disable-next-line: no-console
+    apiFeature.getFeatures().then((res) => console.log(res));
+  }
 }

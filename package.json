@@ -1,6 +1,6 @@
 {
   "name": "ff-module-pp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Feature flags",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -19,7 +19,10 @@
     "type": "git",
     "url": "git+https://github.com/mancini-leandro/ff-module.git"
   },
-  "keywords": ["Feature flags", "Feature toggle"],
+  "keywords": [
+    "Feature flags",
+    "Feature toggle"
+  ],
   "author": "Leandro Mancini",
   "license": "ISC",
   "bugs": {

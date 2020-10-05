@@ -1,9 +1,7 @@
 export class FFConfig {
-    url: string;
+  url: string;
 
-    constructor(
-        url: string
-    ) {
-        this.url = url;
-    }
+  constructor(url: string) {
+    this.url = url;
+  }
 }

@@ -1,5 +1,5 @@
 export interface IApiResponse<T> {
-    data: T;
-    error: boolean;
-    messages: string[];
+  data: T;
+  error: boolean;
+  messages: string[];
 }

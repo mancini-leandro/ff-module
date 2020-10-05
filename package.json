@@ -1,6 +1,6 @@
 {
   "name": "ff-module-pp",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Feature flags",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

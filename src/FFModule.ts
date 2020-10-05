@@ -12,10 +12,9 @@ export class FFModule {
     this.getFeatures();
   }
 
-  getFeatures() {
+  private getFeatures() {
     const apiFeature = new ApiFeature(this.config.url);
 
-    // tslint:disable-next-line: no-console
-    apiFeature.getFeatures().then((res) => console.log(res));
+    apiFeature.getFeatures().then((res: Feature[]) => this.features = res);
   }
 }

@@ -28,7 +28,7 @@ export class FFModule {
   private init() {
     const apiFeature = new ApiFeature(this.config.url);
 
-    timer(10000, 10000).subscribe(() => {
+    timer(0, 10000).subscribe(() => {
       apiFeature.getFeatures().subscribe((res: Feature[]) => (this.FEATURES = res));
     });
   }

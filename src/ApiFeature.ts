@@ -1,8 +1,8 @@
 import { IFeature } from './/interfaces/IFeature';
 import { IApiResponse } from './interfaces/IApiResponse';
 import { Feature } from './models/Feature';
-import { Observable, timer } from 'rxjs';
-import { map, switchMap, takeUntil } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { FFGlobals } from './FFGlobals';
 
 export class ApiFeature implements IFeature {
@@ -19,7 +19,7 @@ export class ApiFeature implements IFeature {
       return this.fetchFeatureName(featureName);
     }
 
-    return this.fetchFeature().pipe(takeUntil(timer(2000)));
+    return this.fetchFeature();
   }
 
   private fetchFeatureName(featureName: string): Observable<any> {
@@ -34,15 +34,15 @@ export class ApiFeature implements IFeature {
         method: 'post',
         body: JSON.stringify({}),
       })
-        .then(this.handleErrors)
-        .then((response: Response) => {
-          return response.json();
-        })
-        .then((response: IApiResponse<Feature[]>) => {
-          subscribe.next(response.data);
-          subscribe.complete();
-        })
-        .catch((err) => subscribe.error(err));
+      .then(this.handleErrors)
+      .then((response: Response) => {
+        return response.json();
+      })
+      .then((response: IApiResponse<Feature[]>) => {
+        subscribe.next(response.data);
+        subscribe.complete();
+      })
+      .catch((err) => subscribe.error(err));
     });
   }
 

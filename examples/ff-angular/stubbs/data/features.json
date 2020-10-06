@@ -1,0 +1,41 @@
+{
+    "data": [
+        {
+            "name": "feature_qrcode_bills",
+            "type": "B",
+            "value": "true"
+        },
+        {
+            "name": "feature_feed_scroll_send_event",
+            "type": "B",
+            "value": "true"
+        },
+        {
+            "name": "feature_cpf_in_use_dialog",
+            "type": "B",
+            "value": "false"
+        },
+        {
+            "name": "feature_deactivateAccount_alertSuccessDescription",
+            "type": "S",
+            "value": "Sua conta PicPay foi desativada. Caso queira reativá-la, tente realizar o login e siga as instruções que enviaremos à você."
+        },
+        {
+            "name": "upgrade_checklist_deeplink",
+            "type": "S",
+            "value": "https://app.picpay.com/helpcenter?query=upgrade-de-conta"
+        },
+        {
+            "name": "feature_certificate_pinning_domains",
+            "type": "J",
+            "value": "[\"picpay.com\", \"ws8734652387.picpay.com\"]"
+        },
+        {
+            "name": "feature_tabs_list",
+            "type": "J",
+            "value": "{\"tabs\":[{\"name\": \"PRINCIPAIS\", \"id\": \"main\", \"group\": \"MAIN\", \"ask_permission\": true, \"auto_refresh\": true}, {\"name\": \"LOCAIS\", \"id\": \"places\", \"group\": \"PLACES\", \"ask_permission\": true, \"auto_refresh\": true}, {\"name\": \"STORE\", \"id\": \"store\", \"group\": \"STORE\", \"ask_permission\": false, \"auto_refresh\": false}]}"
+        }
+    ],
+    "messages": [],
+    "error": false
+}

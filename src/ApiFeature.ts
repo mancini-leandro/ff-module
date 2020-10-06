@@ -1,8 +1,8 @@
 import { IFeature } from './/interfaces/IFeature';
 import { IApiResponse } from './interfaces/IApiResponse';
 import { Feature } from './models/Feature';
-import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { Observable, timer } from 'rxjs';
+import { map, switchMap, takeUntil } from 'rxjs/operators';
 import { FFGlobals } from './FFGlobals';
 
 export class ApiFeature implements IFeature {
@@ -19,12 +19,11 @@ export class ApiFeature implements IFeature {
       return this.fetchFeatureName(featureName);
     }
 
-    return this.fetchFeature();
+    return this.fetchFeature().pipe(takeUntil(timer(5e3)));
   }
 
   private fetchFeatureName(featureName: string): Observable<any> {
     return this.fetchFeature().pipe(map((items: Feature[]) => this.globals.findFeature(items, featureName)));
-    // .pipe(switchMap((item: Feature) => this.switchMapFeature(item)));
   }
 
   private fetchFeature(): Observable<Feature[]> {
@@ -35,15 +34,15 @@ export class ApiFeature implements IFeature {
         method: 'post',
         body: JSON.stringify({}),
       })
-        .then(this.handleErrors)
-        .then((response: Response) => {
-          return response.json();
-        })
-        .then((response: IApiResponse<Feature[]>) => {
-          subscribe.next(response.data);
-          subscribe.complete();
-        })
-        .catch((err) => subscribe.error(err));
+      .then(this.handleErrors)
+      .then((response: Response) => {
+        return response.json();
+      })
+      .then((response: IApiResponse<Feature[]>) => {
+        subscribe.next(response.data);
+        subscribe.complete();
+      })
+      .catch((err) => subscribe.error(err));
     });
   }
 

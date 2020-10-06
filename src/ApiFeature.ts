@@ -22,8 +22,7 @@ export class ApiFeature implements IFeature {
   }
 
   private fetchFeatureName(featureName: string): Observable<any> {
-    return this.fetchFeature()
-    .pipe(map((items: Feature[]) => this.globals.findFeature(items, featureName)))
+    return this.fetchFeature().pipe(map((items: Feature[]) => this.globals.findFeature(items, featureName)));
     // .pipe(switchMap((item: Feature) => this.switchMapFeature(item)));
   }
 

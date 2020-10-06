@@ -1,16 +1,16 @@
-import { Feature } from "./models/Feature";
+import { Feature } from './models/Feature';
 import * as lodash from 'lodash';
 
 export class FFGlobals {
-    findFeature(items: Feature[], featureName: string) {
-        return lodash.find(items, { name: featureName });
+  findFeature(items: Feature[], featureName: string) {
+    return lodash.find(items, { name: featureName });
+  }
+
+  MapBoolFeature(item: Feature) {
+    if (item.type === 'B') {
+      item.value = JSON.parse(item.value);
     }
 
-    MapBoolFeature(item: Feature) {
-        if (item.type === 'B') {
-          item.value = JSON.parse(item.value);
-        }
-    
-        return item;
-    }
+    return item;
+  }
 }

@@ -19,7 +19,7 @@ export class ApiFeature implements IFeature {
       return this.fetchFeatureName(featureName);
     }
 
-    return this.fetchFeature().pipe(takeUntil(timer(5e3)));
+    return this.fetchFeature().pipe(takeUntil(timer(2000)));
   }
 
   private fetchFeatureName(featureName: string): Observable<any> {

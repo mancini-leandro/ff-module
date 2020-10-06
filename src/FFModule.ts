@@ -3,6 +3,7 @@ import { ApiFeature } from './ApiFeature';
 import { Feature } from './models/Feature';
 import * as lodash from 'lodash';
 import { FFGlobals } from './FFGlobals';
+import { timer } from 'rxjs';
 
 export class FFModule {
   config: FFConfig;
@@ -27,7 +28,9 @@ export class FFModule {
   private init() {
     const apiFeature = new ApiFeature(this.config.url);
 
-    apiFeature.getFeatures().subscribe((res: Feature[]) => (this.FEATURES = res));
+    timer(3000, 3000).subscribe(() => {
+      apiFeature.getFeatures().subscribe((res: Feature[]) => (this.FEATURES = res));
+    });
   }
 
   getFeature(featureName?: string): any {

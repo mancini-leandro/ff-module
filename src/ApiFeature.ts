@@ -34,15 +34,15 @@ export class ApiFeature implements IFeature {
         method: 'post',
         body: JSON.stringify({}),
       })
-      .then(this.handleErrors)
-      .then((response: Response) => {
-        return response.json();
-      })
-      .then((response: IApiResponse<Feature[]>) => {
-        subscribe.next(response.data);
-        subscribe.complete();
-      })
-      .catch((err) => subscribe.error(err));
+        .then(this.handleErrors)
+        .then((response: Response) => {
+          return response.json();
+        })
+        .then((response: IApiResponse<Feature[]>) => {
+          subscribe.next(response.data);
+          subscribe.complete();
+        })
+        .catch((err) => subscribe.error(err));
     });
   }
 

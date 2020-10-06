@@ -1,6 +1,7 @@
 import { FFConfig } from './FFConfig';
 import { ApiFeature } from './ApiFeature';
 import { Feature } from './models/Feature';
+import * as lodash from 'lodash';
 
 export class FFModule {
   config: FFConfig;
@@ -26,13 +27,17 @@ export class FFModule {
     apiFeature.getFeatures().subscribe((res: Feature[]) => (this.FEATURES = res));
   }
 
-  getFeature(featureName?: string): Feature {
+  getFeature(featureName?: string): any {
     if (this.FEATURES.length > 0) {
-      const feature = new Feature().getFeatureName(this.FEATURES, featureName);
+      const feature = this.getFeatureName(this.FEATURES, featureName) as Feature;
 
       return feature;
     }
 
-    return new Feature();
+    return null;
+  }
+
+  private getFeatureName(features: Feature[], featureName?: string): Feature {
+    return lodash.find(features, { name: featureName }) as Feature;
   }
 }

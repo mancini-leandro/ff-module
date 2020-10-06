@@ -2,11 +2,12 @@ import { IFeature } from './/interfaces/IFeature';
 import { IApiResponse } from './interfaces/IApiResponse';
 import { Feature } from './models/Feature';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import * as lodash from 'lodash';
+import { map, switchMap } from 'rxjs/operators';
+import { FFGlobals } from './FFGlobals';
 
 export class ApiFeature implements IFeature {
   url: string;
+  globals = new FFGlobals();
 
   constructor(url: string) {
     this.url = url;
@@ -21,7 +22,9 @@ export class ApiFeature implements IFeature {
   }
 
   private fetchFeatureName(featureName: string): Observable<any> {
-    return this.fetchFeature().pipe(map((items: Feature[]) => this.mapFeature(items, featureName)));
+    return this.fetchFeature()
+    .pipe(map((items: Feature[]) => this.globals.findFeature(items, featureName)))
+    // .pipe(switchMap((item: Feature) => this.switchMapFeature(item)));
   }
 
   private fetchFeature(): Observable<Feature[]> {
@@ -42,10 +45,6 @@ export class ApiFeature implements IFeature {
         })
         .catch((err) => subscribe.error(err));
     });
-  }
-
-  private mapFeature(items: Feature[], featureName: string) {
-    return lodash.find(items, { name: featureName });
   }
 
   private handleErrors(response: Response) {

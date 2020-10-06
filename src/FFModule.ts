@@ -2,9 +2,11 @@ import { FFConfig } from './FFConfig';
 import { ApiFeature } from './ApiFeature';
 import { Feature } from './models/Feature';
 import * as lodash from 'lodash';
+import { FFGlobals } from './FFGlobals';
 
 export class FFModule {
   config: FFConfig;
+  globals: FFGlobals;
 
   get features(): Feature[] {
     return this.FEATURES;
@@ -18,6 +20,7 @@ export class FFModule {
 
   constructor(url: string) {
     this.config = new FFConfig(url);
+    this.globals = new FFGlobals();
     this.init();
   }
 
@@ -38,6 +41,12 @@ export class FFModule {
   }
 
   private getFeatureName(features: Feature[], featureName?: string): Feature {
-    return lodash.find(features, { name: featureName }) as Feature;
+    const feature = lodash.find(features, { name: featureName }) as Feature;
+
+    if (feature) {
+      return this.globals.MapBoolFeature(feature);
+    }
+
+    return feature;
   }
 }

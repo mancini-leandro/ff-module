@@ -7,9 +7,10 @@ import { FFGlobals } from './FFGlobals';
 
 export class ApiFeature implements IFeature {
   url: string;
-  globals = new FFGlobals();
+  globals: FFGlobals;
 
   constructor(url: string) {
+    this.globals = new FFGlobals();
     this.url = url;
   }
 

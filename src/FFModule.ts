@@ -19,8 +19,8 @@ export class FFModule {
 
   private FEATURES: Feature[] = [];
 
-  constructor(url: string) {
-    this.config = new FFConfig(url);
+  constructor(url: string, interval?: number) {
+    this.config = new FFConfig(url, interval);
     this.globals = new FFGlobals();
     this.init();
   }
@@ -28,7 +28,7 @@ export class FFModule {
   private init() {
     const apiFeature = new ApiFeature(this.config.url);
 
-    timer(0, 2000).subscribe(() => {
+    timer(0, this.config.interval ? this.config.interval : 3000).subscribe(() => {
       apiFeature.getFeatures().subscribe((res: Feature[]) => (this.FEATURES = res));
     });
   }

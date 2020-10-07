@@ -3,7 +3,7 @@ import { ApiFeature } from './ApiFeature';
 import { Feature } from './models/Feature';
 import * as lodash from 'lodash';
 import { FFGlobals } from './FFGlobals';
-import { timer } from 'rxjs';
+import { interval, timer } from 'rxjs';
 
 export class FFModule {
   config: FFConfig;
@@ -19,8 +19,8 @@ export class FFModule {
 
   private FEATURES: Feature[] = [];
 
-  constructor(url: string, interval?: number) {
-    this.config = new FFConfig(url, interval);
+  constructor(url: string, interv?: number) {
+    this.config = new FFConfig(url, interv);
     this.globals = new FFGlobals();
     this.init();
   }
@@ -28,14 +28,24 @@ export class FFModule {
   private init() {
     const apiFeature = new ApiFeature(this.config.url);
 
-    timer(0, this.config.interval ? this.config.interval : 3000).subscribe(() => {
-      apiFeature.getFeatures().subscribe((res: Feature[]) => (this.FEATURES = res));
+    const source = interval(3000);
+
+    source.subscribe(() => {
+      apiFeature
+      .getFeatures()
+      .subscribe((res: Feature[]) => (this.features = res));
     });
+
+    // timer(0, this.config.interval ? this.config.interval : 3000).subscribe(() => {
+      // apiFeature
+      // .getFeatures()
+      // .subscribe((res: Feature[]) => (this.features = res));
+    // });
   }
 
   getFeature(featureName?: string): any {
-    if (this.FEATURES.length > 0) {
-      const feature = this.getFeatureName(this.FEATURES, featureName) as Feature;
+    if (this.features.length > 0) {
+      const feature = this.getFeatureName(this.features, featureName) as Feature;
 
       return feature;
     }

@@ -3,31 +3,31 @@ import { FFModule } from './FFModule';
 import { Feature } from './models/Feature';
 
 const features = [
-    { name: 'feature_boolean', type: 'B', value: 'true' },
-    { name: 'feature_string', type: 'S', value: 'stringText' },
-    { name: 'feature_json', type: 'J', value: '{"teste":123}' },
-  ] as Feature[];
+  { name: 'feature_boolean', type: 'B', value: 'true' },
+  { name: 'feature_string', type: 'S', value: 'stringText' },
+  { name: 'feature_json', type: 'J', value: '{"teste":123}' },
+] as Feature[];
 
 describe('FFModule', () => {
-    let ffmodule: FFModule;
+  let ffmodule: FFModule;
 
-    beforeEach(() => {
-        const url = 'http://api.url.com.br';
-        ffmodule = new FFModule(url);
-    });
+  beforeEach(() => {
+    const url = 'http://api.url.com.br';
+    ffmodule = new FFModule(url);
+  });
 
-    it('should get features', () => {
-        expect(ffmodule.getFeature()).toBeNull();
+  it('should get features', () => {
+    expect(ffmodule.getFeature()).toBeNull();
 
-        ffmodule.features = features;
+    ffmodule.features = features;
 
-        ffmodule.getFeature();
+    ffmodule.getFeature();
 
-        expect(ffmodule.features.length).toBeGreaterThan(0);
-        expect(ffmodule.getFeature()).toBeUndefined();
+    expect(ffmodule.features.length).toBeGreaterThan(0);
+    expect(ffmodule.getFeature()).toBeUndefined();
 
-        expect(ffmodule.getFeature('feature_boolean')).toEqual(features[0]);
-        expect(ffmodule.getFeature('feature_string')).toEqual(features[1]);
-        expect(ffmodule.getFeature('feature_json')).toEqual(features[2]);
-    });
+    expect(ffmodule.getFeature('feature_boolean')).toEqual(features[0]);
+    expect(ffmodule.getFeature('feature_string')).toEqual(features[1]);
+    expect(ffmodule.getFeature('feature_json')).toEqual(features[2]);
+  });
 });

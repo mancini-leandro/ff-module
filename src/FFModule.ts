@@ -31,15 +31,13 @@ export class FFModule {
     const source = interval(3000);
 
     source.subscribe(() => {
-      apiFeature
-      .getFeatures()
-      .subscribe((res: Feature[]) => (this.features = res));
+      apiFeature.getFeatures().subscribe((res: Feature[]) => (this.features = res));
     });
 
     // timer(0, this.config.interval ? this.config.interval : 3000).subscribe(() => {
-      // apiFeature
-      // .getFeatures()
-      // .subscribe((res: Feature[]) => (this.features = res));
+    // apiFeature
+    // .getFeatures()
+    // .subscribe((res: Feature[]) => (this.features = res));
     // });
   }
 

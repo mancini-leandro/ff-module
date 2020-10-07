@@ -47,7 +47,7 @@ export class FFModule {
     const feature = lodash.find(features, { name: featureName }) as Feature;
 
     if (feature) {
-      return this.globals.MapBoolFeature(feature);
+      return this.globals.mapBoolFeature(feature);
     }
 
     return feature;

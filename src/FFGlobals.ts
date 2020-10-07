@@ -6,7 +6,7 @@ export class FFGlobals {
     return lodash.find(items, { name: featureName });
   }
 
-  MapBoolFeature(item: Feature) {
+  mapBoolFeature(item: Feature) {
     if (item.type === 'B') {
       item.value = JSON.parse(item.value);
     }

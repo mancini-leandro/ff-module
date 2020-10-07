@@ -4,6 +4,7 @@ import { Feature } from './models/Feature';
 import * as lodash from 'lodash';
 import { FFGlobals } from './FFGlobals';
 import { interval, timer } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 export class FFModule {
   config: FFConfig;
@@ -27,17 +28,18 @@ export class FFModule {
 
   private init() {
     const apiFeature = new ApiFeature(this.config.url);
+    const time = this.config.interval ? this.config.interval : 3000;
+    const source = interval(time);
 
-    const source = interval(3000);
+    apiFeature
+    .getFeatures()
+    .pipe(
+      debounceTime(3000)
+    )
+    .subscribe((res: Feature[]) => (this.features = res));
 
-    source.subscribe(() => {
-      apiFeature.getFeatures().subscribe((res: Feature[]) => (this.features = res));
-    });
-
-    // timer(0, this.config.interval ? this.config.interval : 3000).subscribe(() => {
-    // apiFeature
-    // .getFeatures()
-    // .subscribe((res: Feature[]) => (this.features = res));
+    // source.subscribe(() => {
+    //   apiFeature.getFeatures().subscribe((res: Feature[]) => (this.features = res));
     // });
   }
 

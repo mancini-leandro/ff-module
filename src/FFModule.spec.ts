@@ -1,3 +1,4 @@
+import { interval } from 'rxjs';
 import { FFConfig } from './FFConfig';
 import { FFModule } from './FFModule';
 import { Feature } from './models/Feature';
@@ -13,7 +14,16 @@ describe('FFModule', () => {
 
   beforeEach(() => {
     const url = 'http://api.url.com.br';
+
     ffmodule = new FFModule(url);
+  });
+
+  it('shoud create', () => {
+    // spyOn(interval.prototype, '').and.callFake(stubDelay);
+
+    // source.subscribe(() => {});
+
+    // ffmodule.init();
   });
 
   it('should get features', () => {

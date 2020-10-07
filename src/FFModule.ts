@@ -20,8 +20,8 @@ export class FFModule {
 
   private FEATURES: Feature[] = [];
 
-  constructor(url: string, interv?: number) {
-    this.config = new FFConfig(url, interv);
+  constructor(url: string) {
+    this.config = new FFConfig(url);
     this.globals = new FFGlobals();
   }
 

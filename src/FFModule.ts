@@ -32,11 +32,9 @@ export class FFModule {
     const source = interval(time);
 
     apiFeature
-    .getFeatures()
-    .pipe(
-      debounceTime(3000)
-    )
-    .subscribe((res: Feature[]) => (this.features = res));
+      .getFeatures()
+      .pipe(debounceTime(3000))
+      .subscribe((res: Feature[]) => (this.features = res));
 
     // source.subscribe(() => {
     //   apiFeature.getFeatures().subscribe((res: Feature[]) => (this.features = res));

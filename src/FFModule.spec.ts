@@ -20,9 +20,7 @@ describe('FFModule', () => {
 
   it('shoud create', () => {
     // spyOn(interval.prototype, '').and.callFake(stubDelay);
-
     // source.subscribe(() => {});
-
     // ffmodule.init();
   });
 

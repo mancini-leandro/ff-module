@@ -9,7 +9,6 @@ const features = [
   ] as Feature[];
 
 describe('FFModule', () => {
-    let config: FFConfig;
     let ffmodule: FFModule;
 
     beforeEach(() => {

@@ -3,12 +3,12 @@ import { ApiFeature } from './ApiFeature';
 import { Feature } from './models/Feature';
 import * as lodash from 'lodash';
 import { FFGlobals } from './FFGlobals';
-import { interval, timer } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { interval } from 'rxjs';
 
 export class FFModule {
   config: FFConfig;
   globals: FFGlobals;
+  pollingSubscription: any;
 
   get features(): Feature[] {
     return this.FEATURES;
@@ -23,22 +23,16 @@ export class FFModule {
   constructor(url: string, interv?: number) {
     this.config = new FFConfig(url, interv);
     this.globals = new FFGlobals();
-    this.init();
   }
 
-  private init() {
+  init() {
     const apiFeature = new ApiFeature(this.config.url);
     const time = this.config.interval ? this.config.interval : 3000;
-    const source = interval(time);
+    this.pollingSubscription = interval(time);
 
-    apiFeature
-      .getFeatures()
-      .pipe(debounceTime(3000))
-      .subscribe((res: Feature[]) => (this.features = res));
-
-    // source.subscribe(() => {
-    //   apiFeature.getFeatures().subscribe((res: Feature[]) => (this.features = res));
-    // });
+    this.pollingSubscription.subscribe(() => {
+      apiFeature.getFeatures().subscribe((res: Feature[]) => (this.features = res));
+    });
   }
 
   getFeature(featureName?: string): any {

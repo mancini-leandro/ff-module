@@ -46,8 +46,6 @@ export class ApiFeature implements IFeature {
     });
   }
 
-  
-
   private handleErrors(response: Response) {
     if (!response.ok) {
       throw Error(response.statusText);

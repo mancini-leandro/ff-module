@@ -22,11 +22,11 @@ export class ApiFeature implements IFeature {
     return this.fetchFeature();
   }
 
-  private fetchFeatureName(featureName: string): Observable<any> {
+  fetchFeatureName(featureName: string): Observable<any> {
     return this.fetchFeature().pipe(map((items: Feature[]) => this.globals.findFeature(items, featureName)));
   }
 
-  private fetchFeature(): Observable<Feature[]> {
+  fetchFeature(): Observable<Feature[]> {
     const apiUrl = this.url;
 
     return new Observable((subscribe) => {
@@ -45,6 +45,8 @@ export class ApiFeature implements IFeature {
         .catch((err) => subscribe.error(err));
     });
   }
+
+  
 
   private handleErrors(response: Response) {
     if (!response.ok) {

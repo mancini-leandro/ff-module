@@ -10,5 +10,10 @@ import { environment } from 'src/environments/environment';
 export class AppComponent {
   title = 'ff-angular';
 
-  ffmodule = new FFModule(environment.featureFlagApi + '/flags/features', 60000);
+  ffmodule = new FFModule(environment.featureFlagApi + '/flags/features');
+
+  constructor() {
+    this.ffmodule.config.interval = 10000;
+    this.ffmodule.init();
+  }
 }

@@ -24,7 +24,8 @@ describe('FFModule', () => {
   it('shoud init add interval', () => {
     const url = 'http://api.url.com.br';
 
-    ffmodule = new FFModule(url, 5000);
+    ffmodule = new FFModule(url);
+    ffmodule.config.interval = 5000;
 
     ffmodule.init();
   });
